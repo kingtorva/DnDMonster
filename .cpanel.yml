@@ -1,0 +1,5 @@
+deployment:
+  tasks:
+    - export DEPLOYPATH=~/public_html/dndmonster/
+    - mkdir -p $DEPLOYPATH
+    - cp * $DEPLOYPATH
