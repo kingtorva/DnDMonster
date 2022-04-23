@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>DnDMonsters</title>
+   
+    
+    <!-- Fonts via Monotype. Licenced for educational use. -->
+    <link href="https://cdn.fonts.net/kit/fa9ee2d0-7e46-11ec-9ce3-0220834439f4/fa9ee2d0-7e46-11ec-9ce3-0220834439f4.css" rel="stylesheet" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitter&family=Bree+Serif&display=swap" rel="stylesheet">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lekton:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Development version of VueJS -->
+    <script src="https://unpkg.com/vue@next"></script> 
+    <!-- Axios for making HTTP requests.  -->
+    <script src="https://unpkg.com/axios@0.24.0/dist/axios.min.js"></script>
+    <!-- NOTE: If you prefer you can use the fetch API instead of axios.
+    https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch  -->
+
+    <!-- NOTE: the below script has a "defer" attribute. It will load only when page is ready -->
+    <!-- Custom JS -->
+    <script defer src="script.js" ></script>
+</head>
+    <body >
+        <main id="app">  
+            
+                <div v-if="loading" id="loader">
+                    <!-- https://loading.io/  -->
+                    <img src="loader.svg"> 
+                </div>
+                
+                <!-- 
+                Using VueJS to loop over all films. 
+                Each one is represented by an image.
+                On click, VueJS opens opens the corresponding film.
+                 -->
+
+                <div>
+
+   
+
+
+                    <div  class="title">D&D Monsters</div>
+                <nav id="films" v-if="films"> 
+                    
+                   
+             
+                    
+                    <a v-for="(film, filmKey) in films" :key="film.id" class="menuItem"  @click="showFilm(filmKey)" >{{film.name}}</a>
+
+                    
+                </nav>
+
+
+
+
+
+
+            </div>
+           
+                <article id="film"  v-if="film">
+
+                   
+                    <div  class="title">D&D Monsters</div>
+
+                    
+
+                    <!--
+                    In this banner, the text layout is flush with the bottom of the the image
+                    The text also uses a semi-transparent background so that it stands out better.
+                    Check out the corresponding CSS to see how its done.
+                    -->
+                    
+                    <div class="banner">
+                        <img :src="film.movie_banner">
+                        <h2 class="text-center">
+                            {{ film.name }} 
+                        </h2>  
+                    </div>
+
+                    <!--
+                    Flexbox is helpful here to lay out the director and producer widgets. 
+                    Each widget grows to fill available space but wraps when we run out of space.
+                    HTML Markup and corresponding CSS help to differentiate the data from its label. 
+                    -->
+                    <div class="widgets creators">
+                        <div class="widget"> 
+                            <div class="data">{{ film.type }}</div>
+                            <div class="label">type</div>
+                        </div>
+                        <div class="widget">
+                            <div class="data">{{ film.alignment }}</div>
+                            <div class="label">alignment</div>
+                        </div>
+                    </div>
+                        <div class="widgets creators">
+                    <div class="widget">
+                        <div class="data">{{ film.strength }}</div>
+                        <div class="label">strength</div>
+                    </div>
+                    <div class="widget">
+                        <div class="data">{{ film.dexterity }}</div>
+                        <div class="label">dexterity</div>
+                    </div>
+                    <div class="widget">
+                        <div class="data">{{ film.constitution }}</div>
+                        <div class="label">constitution</div>
+                    </div>
+                </div>
+                    <div class="widgets creators">
+                    <div class="widget">
+                        <div class="data">{{ film.intelligence }}</div>
+                        <div class="label">intelligence</div>
+                    </div>
+                    <div class="widget">
+                        <div class="data">{{ film.wisdom }}</div>
+                        <div class="label">wisdom</div>
+                    </div>
+                    <div class="widget">
+                        <div class="data">{{ film.charisma }}</div>
+                        <div class="label">charisma</div>
+                    </div>
+                </div>
+           
+                    <!--
+                    Generous sized type makes the description come to life.
+                    the first line is bolded using a CSS pseudo class. 
+                    -->
+                    <div class="details"> 
+                        <p> {{ film.description }} </p>
+                    </div>
+
+                    <!--
+                        Stats widgets are styled similarly to the creators area
+                    -->
+                        <div class="widgets statistics">
+                            <div class="widget">
+                                <div class="data">{{ film.armor_class }}</div>
+                                <div class="label">armor class</div>
+                            </div>
+                            
+                     
+                    <div class="widget">
+                        <div class="data">{{ film.hit_points }}</div>
+                        <div class="label">hit points</div>
+                    </div>
+                        
+                 
+                 <div class="widget">
+                    <div class="data">{{ film.hit_dice }}</div>
+                    <div class="label">hit dice</div>
+                </div>
+            </div>     
+        </div>
+
+    <!-- Comments section-->
+    <div class="title">Comments</div>
+      <form class="inputgrid" @submit.prevent="addComment($event)"> 
+              <textarea id="createText" cols="10" placeholder="What do you know about this monster?"></textarea> 
+          <button class="button" @click="add(comment)">post</button>
+      </form> 
+    <section id="commentsSection">
+      
+      <div class="commentsbox">
+        <div class="commentarea" v-for="comment in film.comments">
+          {{comment}}
+        </div>
+
+
+      </div>
+    </section>
+                  
+                  
+                   
+
+                </article>
+                <article id="welcome" v-if="!film">
+                    <!--image was taken from https://freepikpsd.com/dnd-png-transparent-images/482064/dnd-png-4-transparent-images/ -->
+                    <img src="DND.png" />
+                </article>
+            </nav>
+        </main>
+      
+       <div id="credits">
+                    This is a demo page to fetch and display data from an API. Created by <a href="https://nsitu.ca">Bell Johanthan</a> in the context of Integrated Systems Design 2 in <a href="https://www.rottentomatoes.com/">Rotten Tomatoes</a>. Fonts via <a href="https://enterprise.monotype.com/en/family/exljbris/antona">Monotype</a>.the <a href="https://ixd.sheridancollege.ca/program.html">Interaction Design</a> program at <a href="https://www.sheridancollege.ca/">Sheridan College.</a> Made with <a href="https://v3.vuejs.org/">Vue 3</a>. Data via the <a href="https://www.dnd5eapi.co/api/">D&D API</a>, fetched with <a href="https://axios-http.com/">Axios HTTP Client</a>. RT logo via  
+                </div>
+      
+    </body>
+</html>

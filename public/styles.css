@@ -1,0 +1,272 @@
+
+body{ 
+    margin: 0; 
+    /* font-family: 'AntonaMedium'; */
+    color: #fff;
+    font-family: 'Bree Serif', serif;
+    background-color: rgb(61, 60, 60);
+   /* https://wallpaperaccess.com/dnd */
+    background-image: url(img/Dragon2.jpg);
+    background-repeat: no-repeat;
+    
+}
+
+* { box-sizing: border-box; }
+
+/* The overall Page layout is a flex row (nav and content side-by-side) 
+We will override this for smaller screens later on*/
+main { 
+    display: flex; 
+    flex-direction: row;
+    
+}
+
+
+/* On a big screen we split the layout 30%/70%
+Note the units are "vw" (viewport width) */
+main nav { width: 40vw; }
+main comment {width:40vw;}
+main article{ width: 70vw; }
+
+
+/* On a small screen the navigation moves to the top. */
+@media (max-width: 900px) { 
+    main { flex-direction: column; } 
+    main nav, main article { width: 100vw; }
+}
+
+/* the navigation is also a flex container but is has wrap enabled. 
+it also has some justificaiton applied to the images. */
+nav{ 
+    display: flex;
+    flex-direction: row; 
+    flex-wrap: wrap; 
+    justify-content: flex-start;
+    align-content: flex-start; 
+    background-color: rgb(61, 60, 60);
+    /* https://www.youtube.com/watch?v=ZXtWarf3lvg */
+
+    /* height: 49vw; */
+    height: 149.5vh;
+    overflow:hidden;
+    overflow-y:scroll;
+    
+} 
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px
+}
+::-webkit-scrollbar-thumb {
+    background: red;
+    border-radius: 10px;
+  }
+.title{
+    text-align: center;
+    color: red;
+    background-color: rgb(21, 21, 21);
+    width: 100%;
+    margin: 0;
+    padding: 1rem 2rem;
+    font-size: 3em;
+    font-family: 'Bree Serif', serif;
+   
+}
+/* Scale the menuItems in a responsive way */
+nav .menuItem{  
+    
+    
+    width: 20%;  
+    cursor: pointer;
+      padding:10px;
+     
+} 
+nav .menuItem:hover{
+    color: red;
+}
+@media (max-width: 900px) { nav .menuItem{   width: 14.2857%; }  }
+@media (max-width: 600px) { nav .menuItem{   width: 16.667%; }  }
+  
+
+#loader {  
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 30vw; 
+    height: 100vh;
+} 
+
+
+/* On the welcome/ landing area, the content is fully centered. */
+#welcome {  
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 100vh;
+    
+} 
+
+
+@media (max-width: 900px) { #welcome{   height: auto; }  }
+
+
+/* The banner div has a relative position. 
+This allows us to position the text inside it absolutely.
+While also maintaining an image below the text.  */
+#film .banner{
+    
+    position: relative;
+    margin: 5rem 5rem 1rem 5rem;
+}
+/*On a small screen the banner doesn't really need such a big margin. */
+@media (max-width: 900px) { #film .banner{   margin: 1rem 0rem 1rem 0rem; }  }
+#film .banner img{
+    width: 100%; 
+    display:block; 
+}
+#film .banner h2{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: rgb(255, 0, 0);
+    background-color: rgba(22, 22, 22, 0.774);
+    width: 100%;
+    margin: 0;
+    padding: 1rem 2rem;
+    font-size: 3em;
+    font-family: 'Bree Serif', serif;
+}
+
+/* Styling for the description text */
+#film .details{
+    
+    margin: 5rem;
+    font-size: 2rem;
+    font-family: 'Bree Serif', serif;
+
+} 
+@media (max-width: 900px) { #film .details, #film .widgets{   margin: 2rem; }  }
+/* Bold the first line only. */
+/* See also: https://developer.mozilla.org/en-US/docs/Web/CSS/::first-line  */
+#film .details ::first-line{
+    font-family: 'Bree Serif', serif;
+}
+
+/* A flex container for "widgets"*/
+#film .widgets{
+    margin: 1rem 5rem;
+    display: flex; 
+    flex-flow: wrap;
+    text-align: center; 
+    gap: 1rem;  /* The space between flex items. */
+}
+
+/* The CSS for widget assumes a corresponding markup 
+with a variety of classes (e.g. "data",  "unit",  "label") */
+#film .widget{ 
+    padding: 2.5rem;
+    flex-grow: 1;
+}
+#film .widget .data{
+    font-size: 2em;
+    font-family: 'Bree Serif', serif;
+}
+#film .data .unit{
+    font-size: 1rem;
+    font-family: 'Bree Serif', serif;
+}
+#film .widget .label{
+    text-transform: uppercase;
+    font-size: 1.1em; 
+    font-family: 'Bree Serif', serif;
+}
+
+/* Some widgets have different colours. */
+#film .creators .widget{ 
+    color: #fff;
+    background:rgba(127, 134, 146, 0.712);
+}
+#film .statistics .widget{ 
+    color: #fff;
+    background:rgba(224, 8, 8, 0.6);
+}
+
+#credits{
+    margin: 1rem;
+}
+.btn{
+  color:none;  
+  outline: none;
+  margin: 10px;
+  border: none;
+}
+
+a{
+    color: rgb(255, 255, 255);
+}
+
+.commentsbox{
+  background-color: rgb(61, 60, 60);
+  /*
+    height: 32.75em;
+   width: 40vw;
+   
+    position: absolute;*/
+
+ }
+
+ textarea {
+    background-color: rgb(163, 163, 163);
+    color: black;
+    width: 100%;
+    
+    /* height: 7.75em; */
+    border: none;
+    /* margin-top:30em; */
+    
+    padding: 10px;
+  }
+  .commentarea{
+      height: auto;
+      min-height: 50px;
+      width: 100%;
+      margin-top:20px;
+      /* margin-bottom: 10px; */
+    background-color: black;
+    padding: 10px;
+    border-radius: 15px;
+    
+
+  }
+  .comment{
+      height: auto;
+      width: 40%;
+      background-color:grey;
+  }
+.inputgrid{
+    display: flex;
+}  
+.button{
+  
+    padding: 15px 32px;
+    /* margin-top:-2em; */
+    background:rgba(224, 8, 8);
+  border: none;
+    color: #fff;
+    font-weight: 900;
+    
+    
+    /* padding:5%; */
+}
+
+
+.button:hover{
+    background:rgba(224, 8, 8,0.8);
+}
+#commentsSection{
+    background-color: rgb(61, 60, 60);
+    height: auto;
+    min-height: 80vh;
+    padding: 5%;
+    width: 100%;
+}
